@@ -1,22 +1,16 @@
 import React from 'react';
 
-import { Container, MenuContainer,  NavLink } from './styles';
+import { Container, MenuContainer, NavLink } from './styles';
 
 function Header() {
   return (
     <Container>
       <MenuContainer>
-       <MenuContainer>
-       <NavLink to='../' >Home</NavLink>
+        <NavLink to='/register' >Service Register</NavLink>
       </MenuContainer>
       <MenuContainer>
-       <NavLink to='/services/register' >Register Page</NavLink>
+        <NavLink to='/' >Service Request</NavLink>
       </MenuContainer>
-      <MenuContainer>
-       <NavLink to='/services' >Servic Request</NavLink>
-      </MenuContainer>
-      </MenuContainer>
-
     </Container>
   )
 }

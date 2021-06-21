@@ -3,7 +3,20 @@ import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 
 import Header from '../Header/index';
-import { Container, ContainerButton, ItemContainer, FormContainer, InputForm, SelectButton, SectionItens, ServiceName, InputButton, Select, Option, TextLabel } from './styles';
+import {
+  Container,
+  ContainerButton,
+  ItemContainer,
+  FormContainer,
+  InputForm,
+  SelectButton,
+  SectionItens,
+  ServiceName,
+  InputButton,
+  Select,
+  Option,
+  TextLabel
+} from './styles';
 
 function ServiceRequest() {
   const [allServices, setAllServices] = useState('')
@@ -89,9 +102,10 @@ function ServiceRequest() {
             </ServiceName>
             <ItemContainer>
               <Select>
-                <Option>Profisional 1</Option>
-                <Option>Profisional 2</Option>
-                <Option>Profisional 3</Option>
+                <Option>Nome</Option>
+                <Option>Nome</Option>
+                <Option>Nome</Option>
+                <Option>Nome</Option>
               </Select>
             </ItemContainer>
           </SectionItens>
@@ -100,7 +114,6 @@ function ServiceRequest() {
           </ContainerButton>
         </FormContainer>
       </Container>
-
       <Container>
         {Array.isArray(allServices) && allServices.map((myService) => {
           return (
@@ -139,10 +152,7 @@ function ServiceRequest() {
             </>
           )
         })}
-
       </Container>
-
-
     </>
   )
 }

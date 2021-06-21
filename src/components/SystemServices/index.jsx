@@ -1,10 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 
 import Header from '../Header/index';
-import { Container, FormContainer, Input, InputLabel, InputButton } from './styles';
+import {
+  Container,
+  FormContainer,
+  InputForm,
+  ContainerButton,
+  ItemContainer,
+  ServiceName,
+  SectionItens,
+  TextLabel,
+  InputButton,
+  Title
+} from './styles';
 import { useForm } from '../../hooks/hooks';
 
 function SystemServices() {
@@ -36,30 +46,39 @@ function SystemServices() {
   return (
     <>
       <Header />
+      <Title>Bem vindo a página de cadastro dos Serviços de Sistema!</Title>
       <Container>
-        <h2>Bem vindo a página de cadastro dos Serviços de Sistema!</h2>
-        <form onSubmit={addService}>
-          <FormContainer>
-            <InputLabel>Nome do serviço:</InputLabel>
-            <Input
-              type='text'
-              name='serviceName'
-              value={serviceName}
-              onChange={handleInputChange}
-            />
-            <InputLabel>Valor por hora:</InputLabel>
-            <Input
-              type='text'
-              name='hourlyValue'
-              value={hourlyValue}
-              onChange={handleInputChange}
-            />
-          </FormContainer>
-          <div>
+        <FormContainer onSubmit={addService}>
+          <SectionItens>
+            <ServiceName>
+              <TextLabel>Nome do serviço:</TextLabel>
+            </ServiceName>
+            <ItemContainer>
+              <InputForm
+                type='text'
+                name='serviceName'
+                value={serviceName}
+                onChange={handleInputChange}
+              />
+            </ItemContainer>
+          </SectionItens>
+          <SectionItens>
+            <ServiceName>
+              <TextLabel>Valor por hora:</TextLabel>
+            </ServiceName>
+            <ItemContainer>
+              <InputForm
+                type='text'
+                name='hourlyValue'
+                value={hourlyValue}
+                onChange={handleInputChange}
+              />
+            </ItemContainer>
+          </SectionItens>
+          <ContainerButton>
             <InputButton type='submit' value="Cadastrar" />
-          </div>
-        </form>
-        <Link to='../'> VOLTAR</Link>
+          </ContainerButton>
+        </FormContainer>
       </Container>
     </>
   );

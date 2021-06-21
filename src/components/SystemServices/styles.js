@@ -1,40 +1,125 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Container = styled.div `
+export const Container = styled.div`
   display: flex;
-  margin: 20px 20px;
   align-items: center;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
 
-`
+  margin: 40px;
+`;
 
-export const FormContainer = styled.div `
+export const Title = styled.h2`
+  text-align: center;
+`;
+
+export const SectionItens = styled.section`
+  padding: 10px;
+`;
+
+export const ServiceName = styled.div`
+  width: auto;
+  height: 1.8rem;
+
+  padding: 4px;
+
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
 
-  margin: 12px 0px;
+  font-size: 16px;
+  text-align: center;
 
-`
+  margin-bottom: 10px;
+`;
 
-export const Input = styled.input `
+export const ItemContainer = styled.div`
+  height: 4rem;
+  width: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 14px;
+  text-align: center;
+
+  border-radius: 8px;
+
+  padding: 12px;
+
+  color: #fff;
+  background: linear-gradient(to right, #18a86b 0%, #36e3bd 100%);
+`;
+
+export const FormContainer = styled.form`
+  width: auto;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  /* border: 1px solid black; */
+
+  margin-bottom: 20px;
+`;
+
+export const InputForm = styled.input`
   height: 1.5rem;
-  width: 10rem;
+  width: 8rem;
+
   border-radius: 6px;
   border: 1px solid black;
+
   margin: 8px 0;
-  
+
+  outline: none;
+
   background-color: #fff;
-`
+`;
 
-export const InputLabel = styled.label`
-  font-size: 1.4rem;
+export const ContainerButton = styled.div`
+  height: 6.3rem;
 
-`
+  display: flex;
 
-export const InputButton = styled.input `
-  height: 1.5rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+`;
+
+export const SelectButton = styled.button`
+  height: 4rem;
   width: 10rem;
 
-`
+  font-size: 18px;
+  font: 700;
+
+  outline: none;
+
+  border-radius: 16px;
+
+  background-color: #ed8533;
+  color: #fff;
+`;
+
+export const InputButton = styled.input`
+  height: 4rem;
+  width: 10rem;
+
+  font-size: 18px;
+  font: 700;
+
+  outline: none;
+
+  border-radius: 16px;
+
+  background-color: #ed8533;
+  color: #fff;
+`;
+
+export const TextLabel = styled.label`
+  font-size: 20px;
+`;
