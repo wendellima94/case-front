@@ -30,7 +30,7 @@ export const ServiceName = styled.div`
 
 `;
 
-export const GridItem = styled.div`
+export const ItemContainer = styled.div`
   height: 4rem;
   width: auto;
   
@@ -85,6 +85,22 @@ export const ContainerButton = styled.div`
   flex-direction: column;
 
 `;
+export const SelectButton = styled.button `
+
+  height: 4rem;
+  width: 10rem;
+
+  font-size: 18px;
+  font: 700;
+
+  outline: none;
+
+  border-radius: 16px;
+
+  background-color: #ed8533;
+  color: #fff;
+`;
+
 
 export const InputButton = styled.input`
   height: 4rem;

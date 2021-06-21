@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
 
 import api from '../../services/api';
 
 import Header from '../Header/index';
-import { Container, ContainerButton, GridItem, InputForm, SectionItens, ServiceName, FormContainer, InputButton, Select, Option, TextLabel } from './styles';
+import { Container, ContainerButton, ItemContainer, FormContainer, InputForm, SelectButton, SectionItens, ServiceName, InputButton, Select, Option, TextLabel } from './styles';
 
 function ServiceRequest() {
-
   const [allServices, setAllServices] = useState('')
-  const [hourlyValueForId, setHourlyValue] = useState(0)
   const [amountHours, setAmountHours] = useState(0);
-  const [multiplicador, setMultiplicador] = useState(Number)
-
+  const [selectedService, setSelectedService] = useState(
+    {
+      "_id": "",
+      "serviceName": 'Selecione um serviço',
+      "hourlyValue": 0,
+      "createdAt": "",
+      "__v": 0
+    });
 
   useEffect(() => {
     api.get('/')
@@ -22,111 +25,124 @@ function ServiceRequest() {
   }, []);
   console.log(allServices)
 
-  const url = '60d0b6944eff062524fdb625'
-
-  useEffect(() => {
-    api.get(`service/${url}`
-    ).then((response) => {
-      setHourlyValue(response.data.findService.hourlyValue)
-    })
-  }, []);
-
-  console.log(hourlyValueForId)
+  const selectService = (ev) => {
+    ev.preventDefault();
+    api.get(`service/${ev.target.id}`)
+      .then((response) => {
+        setSelectedService(response.data.findService)
+      })
+  }
 
   const handleInputChange = (ev) => {
-    setAmountHours(ev.target.value)
+    setAmountHours(Number(ev.target.value))
   }
-  console.log(amountHours)
 
-  const result = amountHours * hourlyValueForId;
+  const handleFormSubmit = (ev) => {
+    ev.preventDefault();
 
-  useEffect(() => {
-    setMultiplicador(result)
-  }, [result])
+    const total = amountHours * selectedService.hourlyValue * 1.12;
 
-  console.log(result)
-
-  const tax = result * 0.12
-
-  console.log(tax.toFixed(2))
-
-  const calculatedTax = tax + result
-
-  console.log(calculatedTax.toFixed(2))
+    alert(`O valor total após os impostos: ${total.toFixed(2)}`)
+  }
 
   return (
     <>
       <Header />
       <Container>
-          {Array.isArray(allServices) && allServices.map((myServices) => {
-            return (
-              <>
-              <FormContainer action="">
+        <FormContainer onSubmit={handleFormSubmit} >
+          <SectionItens>
+            <ServiceName>
+              <p
+                key={selectedService._id}
+                value={selectedService.serviceName}
+              >
+                Nome do serviço selecionado:
+              </p>
+            </ServiceName>
+            <ItemContainer>
+              <p> {selectedService.serviceName} </p>
+            </ItemContainer>
+          </SectionItens>
+          <SectionItens>
+            <ServiceName>
+              <TextLabel >Quantidade de horas:</TextLabel>
+            </ServiceName>
+            <ItemContainer>
+              <InputForm
+                type='text'
+                onChange={handleInputChange}
+                value={amountHours}
+              />
+            </ItemContainer>
+          </SectionItens>
+          <SectionItens>
+            <ServiceName>
+              <p>Subtotal:</p>
+            </ServiceName>
+            <ItemContainer>
+              <p>{(amountHours * selectedService.hourlyValue).toFixed(2)} R$</p>
+            </ItemContainer>
+          </SectionItens>
+          <SectionItens>
+            <ServiceName>
+              <p>Selecione o profissional</p>
+            </ServiceName>
+            <ItemContainer>
+              <Select>
+                <Option>Profisional 1</Option>
+                <Option>Profisional 2</Option>
+                <Option>Profisional 3</Option>
+              </Select>
+            </ItemContainer>
+          </SectionItens>
+          <ContainerButton>
+            <InputButton type='submit' value='Comprar serviço' />
+          </ContainerButton>
+        </FormContainer>
+      </Container>
+
+      <Container>
+        {Array.isArray(allServices) && allServices.map((myService) => {
+          return (
+            <>
+              <FormContainer>
                 <SectionItens>
                   <ServiceName>
-                    <p key={myServices._id} value={myServices.serviceName}>
+                    <p key={myService._id} value={myService.serviceName}>
                       Nome do serviço:</p>
                   </ServiceName>
-                  <GridItem>
-                    <p> {myServices.serviceName} </p>
-                  </GridItem>
+                  <ItemContainer>
+                    <p> {myService.serviceName} </p>
+                  </ItemContainer>
                 </SectionItens>
                 <SectionItens>
                   <ServiceName>
                     <p>Valor por hora do serviço:</p>
                   </ServiceName>
-                  <GridItem>
-                    <p>{myServices.hourlyValue + ' R$'}</p>
-                  </GridItem>
+                  <ItemContainer>
+                    <p>{myService.hourlyValue + ' R$'}</p>
+                  </ItemContainer>
                 </SectionItens>
-                <SectionItens>
-                  <ServiceName>
-                    <TextLabel >Quantidade de horas:</TextLabel>
-                  </ServiceName>
-                  <GridItem>
-                    <InputForm
-                      type='text'
-                      onChange={handleInputChange}
-                      value={amountHours}
-                    />
-                  </GridItem>
-                </SectionItens>
-                <SectionItens>
-                  <ServiceName>
-                    <p>Valor por horas de serviço:</p>
-                  </ServiceName>
-                  <GridItem>
-                    <p>{(result).toFixed(2)} R$</p>
-                  </GridItem>
-                </SectionItens>
-                <SectionItens>
-                  <ServiceName>
-                    <p>Selecione o profissional</p>
-                  </ServiceName>
-                  <GridItem>
-                    <Select>
-                      <Option>Profisional 1</Option>
-                      <Option>Profisional 2</Option>
-                      <Option>Profisional 3</Option>
-                    </Select>
-                  </GridItem>
-                </SectionItens>
+                {/* /*aa*/}
                 <SectionItens>
                   <ServiceName>
                     <p>Valor do imposto da venda</p>
                   </ServiceName>
-                  <GridItem>
+                  <ItemContainer>
                     <p>12%</p>
-                  </GridItem>
+                  </ItemContainer>
                 </SectionItens>
                 <ContainerButton>
-                <InputButton type='submit' value='Comprar serviço' />
+                  <SelectButton id={myService._id} onClick={selectService} > Selecionar</SelectButton>
                 </ContainerButton>
-                </FormContainer>
-              </>
-                )
-              })}
+              </FormContainer>
+            </>
+          )
+        })}
+
       </Container>
+
+
     </>
   )
 }
