@@ -1,0 +1,17 @@
+/* CONTENT RESET CSS */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+	line-height: 1;
+
+}
+
+ol, ul, a {
+	list-style: none;
+}
